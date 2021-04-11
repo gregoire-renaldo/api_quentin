@@ -1,8 +1,29 @@
 {
+  "name": "api_quentin",
+  "version": "1.0.0",
+  "main": "hAPIness.js",
+  "scripts": {
+    "start": "node hAPIness.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gregoire-renaldo/api_quentin.git"
+  },
+  "author": "Gregoire Renaldo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gregoire-renaldo/api_quentin/issues"
+  },
+  "homepage": "https://github.com/gregoire-renaldo/api_quentin#readme",
+  "description": "",
   "dependencies": {
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "express": "^4.17.1"
+  },
+  "engines": {
+    "node": "15.0.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
