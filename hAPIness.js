@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require("body-parser");
-
 const axios = require('axios');
 
 
@@ -14,6 +13,12 @@ const app = express();
 // Démarrer le serveur
 app.listen(port, hostname, function () {
   console.log("Mon serveur fonctionne sur http://" + hostname + ":" + port + "\n");
+});
+
+app.use(express.static('public'));
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
 });
 
 app.use(express.json());
