@@ -3,15 +3,9 @@ const express = require('express');
 const bodyParser = require("body-parser");
 const axios = require('axios');
 
-
-
 // Nous définissons ici les paramètres du serveur.
-
 const PORT = process.env.PORT || 3000
-
 const app = express();
-
-// Démarrer le serveur
 app.listen(PORT, () => console.log(`Listening on ${PORT}`))
 
 app.use(express.static('public'));
