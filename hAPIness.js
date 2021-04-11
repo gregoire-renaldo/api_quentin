@@ -6,15 +6,13 @@ const axios = require('axios');
 
 
 // Nous définissons ici les paramètres du serveur.
-const hostname = 'localhost';
-const port = process.env.PORT || 3000;
+
+const PORT = process.env.PORT || 3000
 
 const app = express();
 
 // Démarrer le serveur
-app.listen(port, hostname, function () {
-  console.log("Mon serveur fonctionne sur http://" + hostname + ":" + port + "\n");
-});
+app.listen(PORT, () => console.log(`Listening on ${PORT}`))
 
 app.use(express.static('public'));
 
