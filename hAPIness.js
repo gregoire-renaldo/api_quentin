@@ -46,7 +46,7 @@ app.post('/open', function (request, response) {
   // console.log(data)
   response.json(data)
   // change the url for bubble's url
-  axios.post('https://reqres.in/api/users', data)
+  axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
     .then((res) => {
       console.log(res.headers);
       console.log(`Status: ${res.status}`);
@@ -123,7 +123,7 @@ app.post('/actions', function (request, response) {
   }
   response.json(data)
   // change the url for bubble's url
-  axios.post('https://reqres.in/api/users', data)
+  axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
     .then((res) => {
       // console.log(res.headers);
       // console.log(`Status: ${res.status}`);
