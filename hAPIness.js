@@ -3,8 +3,8 @@ require('dotenv').config()
 const express = require('express');
 
 // from slack api event https://github.com/slackapi/node-slack-sdk
-// const { createEventAdapter } = require('@slack/events-api');
-// const slackEvents = createEventAdapter(process.env.SLACK_SIGNING_SECRET);
+const { createEventAdapter } = require('@slack/events-api');
+const slackEvents = createEventAdapter(process.env.SLACK_SIGNING_SECRET);
 
 const bodyParser = require("body-parser");
 const axios = require('axios');
@@ -26,34 +26,17 @@ app.use(express.static('public'));
 // Handle errors (see `errorCodes` export)
 // slackEvents.on('error', console.error);
 
-// app.get('/', (req, res) => {
-//   res.send('Hello World!');
-// });
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
 
 app.use(express.json());
 // url to set on slack, not http://localhost:3000/actions ....
+
+
+
+
 app.post('/open', function (request, response) {
-  console.log(request.body)
-  // const data = {
-  //   type: request.body.type,
-  //   user: request.body.user,
-  //   channel: request.body.channel,
-  //   event_ts: request.body.event_ts,
-  //   tab: request.body.tab,
-  //   id: request.body.view.id,
-  //   team_id: request.body.view.team_id,
-  //   type_view: request.body.view.type,
-  //   private_metadata: request.body.view.private_metadata,
-  //   callback_id: request.body.view.callback_id,
-  //   hash: request.body.view.hash,
-  //   clear_on_close: request.body.view.clear_on_close,
-  //   notify_on_close: request.body.view.notify_on_close,
-  //   root_view_id: request.body.view.root_view_id,
-  //   app_id: request.body.view.app_id,
-  //   external_id: request.body.view.external_id,
-  //   app_installed_team_id: request.body.view.app_installed_team_id,
-  //   bot_id: request.body.view.bot_id,
-  // }
   const data = {
     token: request.body.token,
     team_id: request.body.team_id,
@@ -73,19 +56,20 @@ app.post('/open', function (request, response) {
     authorizations_is_enterprise_install: request.body.authorizations[0].is_enterprise_install,
     is_ext_shared_channel: request.body.is_ext_shared_channel
   }
-  console.log(data)
-  response.json(data)
+  console.log(response.json(data))
 
   // change the url for bubble's url
   axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
-    .then((res) => {
-      // console.log(res.headers);
-      console.log(`Status: ${res.status}`);
-      console.log('Body: ', res.data);
-    }).catch((err) => {
-      console.error(err);
-    });
-  })
+  // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
+  .then((res) => {
+    // console.log(res.headers);
+    // console.log(`Status: ${res.status}`);
+    // console.log('Body: ', res.data);
+  }).catch((err) => {
+    console.error(err);
+  });
+
+})
 
 
 app.post('/actions', function (request, response) {
