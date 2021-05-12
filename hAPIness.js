@@ -26,13 +26,11 @@ app.use(express.static('public'));
 // Handle errors (see `errorCodes` export)
 // slackEvents.on('error', console.error);
 
-app.post('/verify', (req, res) => {
-  console.log(PORT)
-  console.log(req.body)
-  res.status(200).json({
-    "challenge": req.body
-  });
-  console.log(res)
+app.get('/verify', (req, res) => {
+  console.log("requestttttt:" + req)
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end(req.body)
+  console.log("response:" + res)
 });
 
 app.use(express.json());
