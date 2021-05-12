@@ -27,10 +27,8 @@ slackEvents.on('message', (event) => {
 slackEvents.on('error', console.error);
 
 app.post('/verify', (req, res) => {
-  console.log("requestttttt:" + req)
   res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end(req.body + "salut")
-  console.log("response:" + res)
+  res.end(req.body.challenge)
 });
 
 app.use(express.json());
