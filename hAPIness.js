@@ -19,17 +19,17 @@ app.listen(PORT, () => console.log(`Listening on ${PORT}`))
 app.use(express.static('public'));
 
 // Attach listeners to events by Slack Event "type". See: https://api.slack.com/events/message.im
-// slackEvents.on('message', (event) => {
-//   console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text}`);
-// });
+slackEvents.on('message', (event) => {
+  console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text}`);
+});
 
 // Handle errors (see `errorCodes` export)
-// slackEvents.on('error', console.error);
+slackEvents.on('error', console.error);
 
-app.get('/verify', (req, res) => {
+app.post('/verify', (req, res) => {
   console.log("requestttttt:" + req)
   res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end(req.body)
+  res.end(req.body + "salut")
   console.log("response:" + res)
 });
 
