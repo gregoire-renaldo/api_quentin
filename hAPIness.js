@@ -28,7 +28,8 @@ app.use(express.static('public'));
 
 app.post('/verify', (req, res) => {
   console.log(PORT)
-  res.json({
+  console.log(req)
+  res.status(200).json({
     "challenge": req.body.challenge
   });
 });
