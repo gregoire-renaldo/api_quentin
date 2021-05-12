@@ -27,7 +27,11 @@ app.use(express.static('public'));
 // slackEvents.on('error', console.error);
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  console.log(PORT)
+  res.json({
+    "challenge": req.body.challenge
+  });
+  r
 });
 
 app.use(express.json());
