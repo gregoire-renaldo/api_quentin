@@ -26,7 +26,7 @@ app.use(express.static('public'));
 // Handle errors (see `errorCodes` export)
 // slackEvents.on('error', console.error);
 
-app.get('/verify', (req, res) => {
+app.post('/verify', (req, res) => {
   console.log(PORT)
   res.json({
     "challenge": req.body.challenge
