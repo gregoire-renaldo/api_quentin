@@ -13,9 +13,16 @@ const axios = require('axios');
 
 // Nous définissons ici les paramètres du serveur.
 const PORT = process.env.PORT || 3000
-const app = express(); salut
+const app = express();
 // Démarrer le serveur
-app.listen(PORT, () => console.log(`Listening on ${PORT}`))
+// app.listen(PORT, () => console.log(`Listening on ${PORT}`))
+
+// Start a basic HTTP server
+slackEvents.start(PORT).then(() => {
+  // Listening on path '/slack/events' by default
+  console.log(`server listening on port ${PORT}`);
+});
+
 app.use(express.static('public'));
 
 // Attach listeners to events by Slack Event "type". See: https://api.slack.com/events/message.im
@@ -26,9 +33,8 @@ slackEvents.on('message', (event) => {
 // Handle errors (see `errorCodes` export)
 slackEvents.on('error', console.error);
 
-app.post('/verify', (req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end(req.body.challenge)
+app.get('/', (req, res) => {
+  res.send('Hello World!');
 });
 
 app.use(express.json());
