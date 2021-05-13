@@ -43,6 +43,7 @@ app.use(express.json());
 
 app.post('/open', function (request, response) {
   console.log('avant le if, dans /open')
+  console.log(request.body)
   if (request.body.event.type == "home") {
     console.log("opennnn")
     const data = {
