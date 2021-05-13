@@ -34,7 +34,7 @@ slackEvents.on('message', (event) => {
 slackEvents.on('error', console.error);
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.sendFile('index.html');
 });
 
 app.use(express.json());
