@@ -15,33 +15,33 @@ const axios = require('axios');
 const PORT = process.env.PORT || 3000
 const app = express();
 // Démarrer le serveur
-// app.listen(PORT, () => console.log(`Listening on ${PORT}`))
+app.listen(PORT, () => console.log(`Listening on ${PORT}`))
 
 // Start a basic HTTP server
-slackEvents.start(PORT).then(() => {
-  // Listening on path '/slack/events' by default
-  console.log(`server listening on port ${PORT}`);
-});
+// slackEvents.start(PORT).then(() => {
+//   // Listening on path '/slack/events' by default
+//   console.log(`server listening on port ${PORT}`);
+// });
 
 app.use(express.static('public'));
 
 // Attach listeners to events by Slack Event "type". See: https://api.slack.com/events/message.im
-slackEvents.on('message', (event) => {
-  console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text}`);
-});
+// slackEvents.on('message', (event) => {
+//   console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text}`);
+// });
 
 // Handle errors (see `errorCodes` export)
 slackEvents.on('error', console.error);
 
 app.get('/', (req, res) => {
-  res.sendFile('index.html');
+  console.log('saluttttttt')
+  res.send('hello World');
 });
 
 app.use(express.json());
 // url to set on slack, not http://localhost:3000/actions ....
 
-
-
+app.post('open', )
 
 app.post('/open', function (request, response) {
   const data = {
@@ -75,7 +75,6 @@ app.post('/open', function (request, response) {
   }).catch((err) => {
     console.error(err);
   });
-
 })
 
 
