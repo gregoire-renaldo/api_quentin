@@ -43,6 +43,7 @@ app.use(express.json());
 
 app.post('open', function (request, response) {
   if (request.body.event.type == "home") {
+    console.log("opennnn")
     const data = {
       token: request.body.token,
       team_id: request.body.team_id,
@@ -74,6 +75,7 @@ app.post('open', function (request, response) {
         console.error(err);
       });
   } else if (request.body.type == "block_actions") {
+    console.log("block actionsss")
     const data = {
       type: request.body.type,
       user_id: request.body.user.id,
