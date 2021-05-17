@@ -76,11 +76,11 @@ app.post('/open', function (request, response) {
       .then((res) => {
         // console.log(res.headers);
         // console.log(`Status: ${res.status}`);
-        console.log('Body: ', res.data);
       }).catch((err) => {
         console.error(err);
       });
-  } else if (request.body.payload.type == "block_actions") {
+  } else if (JSON.parse(request.body.payload.type) == "block_actions") {
+    console.log('dans le else if')
     const slack_payload = JSON.parse(request.body.payload);
     console.log(slack_payload)
     const data = {
