@@ -195,8 +195,12 @@ app.use(express.json());
 
 // TEST open action solo
 app.post('/open', function (request, response) {
+  req =request
   console.log('avant le if, dans /open request =' + request)
   console.log('type d objet' + ' ' + typeof request)
+  for (var property in req) {
+    alert(property + "=" + req[property]);
+  }
   console.log('request body'+' '+request.body)
   console.log(request.body);
   console.log(request.body.type);
