@@ -46,6 +46,7 @@ app.post('/open', function (request, response) {
   console.log('avant le if, dans /open requuest =' + request)
   console.log('type d objet' + ' ' + typeof request)
   console.log('request body'+' '+request.body)
+  console.log('body.payload ' request.body.payload.type)
   if (request.body.hasOwnProperty('event') && request.body.event.type == "app_home_opened") {
     console.log(" dans le opennnn")
     const data = {
@@ -79,7 +80,7 @@ app.post('/open', function (request, response) {
       }).catch((err) => {
         console.error(err);
       });
-  } else if (JSON.parse(request.body.payload.type) == "block_actions") {
+  } else if (request.body.payload.type == "block_actions") {
     console.log('dans le else if')
     const slack_payload = JSON.parse(request.body.payload);
     console.log(slack_payload)
