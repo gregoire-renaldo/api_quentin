@@ -67,8 +67,8 @@ app.post('/open', function (request, response) {
     }
     console.log("home opeeeeened" + response.json(data))
     // change the url for bubble's url
-    // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
-      axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
+    axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
+      // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
       .then((res) => {
         // console.log(res.headers);
         // console.log(`Status: ${res.status}`);
@@ -140,8 +140,8 @@ app.post('/open', function (request, response) {
     console.log("actionnnn" + response.json(data))
 
     // change the url for bubble's url
-    axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
-    // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
+    // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
+    axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
       .then((res) => {
         // console.log(res.headers);
         // console.log(`Status: ${res.status}`);
@@ -150,7 +150,7 @@ app.post('/open', function (request, response) {
         console.error(err);
       });
   } else {
-    console.log("something other than home_opened or block action")
+    console.log("something other than home_opened or block_action")
   }
 
 })
