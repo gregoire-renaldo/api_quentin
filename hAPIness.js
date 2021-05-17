@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(express.json());
-// url to set on slack, not http://localhost:3000/actions ....
+
 
 // app.post('/open', function (request, response) {
 //   req = request
@@ -195,7 +195,11 @@ app.use(express.json());
 
 // TEST open action solo
 app.post('/open', function (request, response) {
+  console.log('avant le if, dans /open request =' + request)
+  console.log('type d objet' + ' ' + typeof request)
+  console.log('request body'+' '+request.body)
   console.log(request.body);
+  console.log(request.body.type);
   const data = {
     type: request.body.type,
     user_id: request.body.user.id,
@@ -261,7 +265,7 @@ app.post('/open', function (request, response) {
     .then((res) => {
       // console.log(res.headers);
       // console.log(`Status: ${res.status}`);
-      console.log('Body: ', res.data);
+      console.log('Body: ' + res.data);
     }).catch((err) => {
       console.error(err);
     });
