@@ -162,7 +162,7 @@ app.use(express.json());
 
 
 app.post('/open', function (request, response) {
-  console.log(request)
+  console.log(request.body.payload)
     const data = {
       type: request.body.type,
       // user_id: request.body.user.id,
@@ -222,9 +222,9 @@ app.post('/open', function (request, response) {
       // actions_1_type: request.body.actions[0].type,
       // actions_1_action_ts: request.body.actions[0].action_ts,
     }
-    console.log('data'+ ' '+data)
-    console.log("actionnnn" + response.json(data))
-    console.log(request.body)
+    // console.log('data'+ ' '+data)
+    // console.log("actionnnn" + response.json(data))
+    // console.log(request.body)
     // change the url for bubble's url
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
@@ -232,7 +232,7 @@ app.post('/open', function (request, response) {
       .then((res) => {
         // console.log(res.headers);
         // console.log(`Status: ${res.status}`);
-        console.log('Body: action', res.data);
+        // console.log('Body: action', res.data);
       }).catch((err) => {
         console.error(err);
       });
