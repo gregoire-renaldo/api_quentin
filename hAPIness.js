@@ -42,129 +42,48 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-// app.post('/open', function (request, response) {
-//   console.log('avant le if, dans /open requuest =' + request)
-//   console.log('type d objet' + ' ' + typeof request)
-//   console.log('request body'+' '+request.body)
-//   if (request.body.hasOwnProperty('event') && request.body.event.type == "app_home_opened") {
-//     console.log(" dans le opennnn")
-//     const data = {
-//       token: request.body.token,
-//       team_id: request.body.team_id,
-//       api_app_id: request.body.api_app_id,
-//       event_type: request.body.event.type,
-//       event_user: request.body.event.user,
-//       event_channel: request.body.event.channel,
-//       event_tab: request.body.event.tab,
-//       event_event_ts: request.body.event.event_ts,
-//       type: request.body.type,
-//       event_id: request.body.event_id,
-//       event_time: request.body.event_time,
-//       authorizations_enterprise_id: request.body.authorizations[0].enterprise_id,
-//       authorizations_team_id: request.body.authorizations[0].team_id,
-//       authorizations_user_id: request.body.authorizations[0].user_id,
-//       authorizations_is_bot: request.body.authorizations[0].is_bot,
-//       authorizations_is_enterprise_install: request.body.authorizations[0].is_enterprise_install,
-//       is_ext_shared_channel: request.body.is_ext_shared_channel
-//     }
-//     console.log("home opeeeeened" + response.json(data))
-//     console.log(request.body.event.type)
-//     // change the url for bubble's url
-//     axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
-//       // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
-//       .then((res) => {
-//         // console.log(res.headers);
-//         // console.log(`Status: ${res.status}`);
-//         console.log('Body: ', res.data);
-//       }).catch((err) => {
-//         console.error(err);
-//       });
-//   } else if (request.body.hasOwnProperty('type') && request.body.type == "block_actions") {
-//     console.log("dans le block_actions" + request.body)
-//     console.log("dans le block actionsss")
-//     const data = {
-//       type: request.body.type,
-//       user_id: request.body.user.id,
-//       user_username: request.body.user.username,
-//       user_name: request.body.user.name,
-//       user_team_id: request.body.user.team_id,
-//       api_app_id: request.body.api_app_id,
-//       token: request.body.token,
-//       container_type: request.body.container.type,
-//       container_message: request.body.container.message,
-//       container_channel_id: request.body.container.channel_id,
-//       container_is_ephemmeral: request.body.container.container_is_ephemmeral,
-//       trigger_id: request.body.trigger_id,
-//       team_id: request.body.team.id,
-//       team_domain: request.body.team.domain,
-//       enterprise: request.body.enterprise,
-//       is_enterprise_install: request.body.is_enterprise_install,
-//       channel_id: request.body.channel.id,
-//       channel_name: request.body.channel.name,
-//       message_bot_id: request.body.message.bot_id,
-//       message_type: request.body.message.type,
-//       message_text: request.body.message.text,
-//       message_user: request.body.message.user,
-//       message_team: request.body.message.team,
-//       message_blocks_block_1_type: request.body.message.blocks[0].type,
-//       message_blocks_block_1_block_id: request.body.message.blocks[0].block_id,
-//       message_blocks_block_1_text_type: request.body.message.blocks[0].text.type,
-//       message_blocks_block_1_text_text: request.body.message.blocks[0].text.text,
-//       message_blocks_block_1_text_emoji: request.body.message.blocks[0].text.emoji,
-//       message_blocks_block_2_type: request.body.message.blocks[1].type,
-//       message_blocks_block_2_block_id: request.body.message.blocks[1].block_id,
-//       message_blocks_block_2_text_type: request.body.message.blocks[1].text.type,
-//       message_blocks_block_2_text_text: request.body.message.blocks[1].text.text,
-//       message_blocks_block_2_text_verbatim: request.body.message.blocks[1].text.verbatim,
-//       message_blocks_block_2_accessory_type: request.body.message.blocks[1].accessory.type,
-//       message_blocks_block_2_accessory_image_url: request.body.message.blocks[1].accessory.image_url,
-//       message_blocks_block_2_accessory_alt_text: request.body.message.blocks[1].accessory.alt_text,
-//       message_blocks_block_3_type: request.body.message.blocks[2].type,
-//       message_blocks_block_3_block_id: request.body.message.blocks[2].block_id,
-//       message_blocks_block_3_elements_1_type: request.body.message.blocks[2].elements[0].type,
-//       message_blocks_block_3_elements_1_action_id: request.body.message.blocks[2].elements[0].action_id,
-//       message_blocks_block_3_elements_1_text_type: request.body.message.blocks[2].elements[0].text.type,
-//       message_blocks_block_3_elements_1_text_text: request.body.message.blocks[2].elements[0].text.text,
-//       message_blocks_block_3_elements_1_text_emoji: request.body.message.blocks[2].elements[0].text.emoji,
-//       message_blocks_block_3_elements_1_style: request.body.message.blocks[2].elements[0].style,
-//       message_blocks_block_3_elements_1_value: request.body.message.blocks[2].elements[0].value,
-//       message_blocks_block_3_elements_1_url: request.body.message.blocks[2].elements[0].url,
-//       state_values: request.body.state.values,
-//       response_url: request.body.response_url,
-//       actions_1_action_id: request.body.actions[0].action_id,
-//       actions_1_block_id: request.body.actions[0].block_id,
-//       actions_1_text_type: request.body.actions[0].text.type,
-//       actions_1_text_text: request.body.actions[0].text.text,
-//       actions_1_text_emoji: request.body.actions[0].text.emoji,
-//       actions_1_value: request.body.actions[0].value,
-//       actions_1_style: request.body.actions[0].style,
-//       actions_1_type: request.body.actions[0].type,
-//       actions_1_action_ts: request.body.actions[0].action_ts,
-//     }
-//     console.log("actionnnn" + response.json(data))
-//     console.log(request.body)
-//     // change the url for bubble's url
-//     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
-//     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
-//     axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', data)
-//       .then((res) => {
-//         // console.log(res.headers);
-//         // console.log(`Status: ${res.status}`);
-//         console.log('Body: action', res.data);
-//       }).catch((err) => {
-//         console.error(err);
-//       });
-//   } else {
-//     console.log("something other than home_opened or block_actions")
-//     console.log(request.body)
-//     response.send(' what ?');
-//   }
-// })
-
-
 app.post('/open', function (request, response) {
-  const slack_payload = JSON.parse(request.body.payload);
-  console.log(slack_payload)
+  console.log('avant le if, dans /open requuest =' + request)
+  console.log('type d objet' + ' ' + typeof request)
+  console.log('request body'+' '+request.body)
+  if (request.body.hasOwnProperty('event') && request.body.event.type == "app_home_opened") {
+    console.log(" dans le opennnn")
+    const data = {
+      token: request.body.token,
+      team_id: request.body.team_id,
+      api_app_id: request.body.api_app_id,
+      event_type: request.body.event.type,
+      event_user: request.body.event.user,
+      event_channel: request.body.event.channel,
+      event_tab: request.body.event.tab,
+      event_event_ts: request.body.event.event_ts,
+      type: request.body.type,
+      event_id: request.body.event_id,
+      event_time: request.body.event_time,
+      authorizations_enterprise_id: request.body.authorizations[0].enterprise_id,
+      authorizations_team_id: request.body.authorizations[0].team_id,
+      authorizations_user_id: request.body.authorizations[0].user_id,
+      authorizations_is_bot: request.body.authorizations[0].is_bot,
+      authorizations_is_enterprise_install: request.body.authorizations[0].is_enterprise_install,
+      is_ext_shared_channel: request.body.is_ext_shared_channel
+    }
+    console.log("home opeeeeened" + response.json(data))
+    console.log(request.body.event.type)
+    // change the url for bubble's url
+    axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
+      // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
+      .then((res) => {
+        // console.log(res.headers);
+        // console.log(`Status: ${res.status}`);
+        console.log('Body: ', res.data);
+      }).catch((err) => {
+        console.error(err);
+      });
+  } else if (request.body.payload.type == "block_actions") {
+
+
+    const slack_payload = JSON.parse(request.body.payload);
+    console.log(slack_payload)
     const data = {
       type: slack_payload.type,
       user_id: slack_payload.user.id,
@@ -225,19 +144,103 @@ app.post('/open', function (request, response) {
       actions_1_type: slack_payload.actions[0].type,
       actions_1_action_ts: slack_payload.actions[0].action_ts,
     }
-    console.log('data'+ ' '+ data)
-    // console.log("actionnnn" + response.json(data))
-    // console.log(request.body)
+    console.log("actionnnn" + response.json(data))
+    console.log('data' + ' ' + data)
     // change the url for bubble's url
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
-    axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/initialize', data)
+    axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', data)
       .then((res) => {
         // console.log(res.headers);
         // console.log(`Status: ${res.status}`);
-        // console.log('Body: action', res.data);
+        console.log('Body: action', res.data);
       }).catch((err) => {
         console.error(err);
       });
+  } else {
+    console.log("something other than home_opened or block_actions")
+    console.log(request.body)
+    response.send(' what ?');
   }
-)
+})
+
+
+// app.post('/open', function (request, response) {
+//   const slack_payload = JSON.parse(request.body.payload);
+//   console.log(slack_payload)
+//     const data = {
+//       type: slack_payload.type,
+//       user_id: slack_payload.user.id,
+//       user_username: slack_payload.user.username,
+//       user_name: slack_payload.user.name,
+//       user_team_id: slack_payload.user.team_id,
+//       api_app_id: slack_payload.api_app_id,
+//       token: slack_payload.token,
+//       container_type: slack_payload.container.type,
+//       container_message: slack_payload.container.message,
+//       container_channel_id: slack_payload.container.channel_id,
+//       container_is_ephemmeral: slack_payload.container.container_is_ephemmeral,
+//       trigger_id: slack_payload.trigger_id,
+//       team_id: slack_payload.team.id,
+//       team_domain: slack_payload.team.domain,
+//       enterprise: slack_payload.enterprise,
+//       is_enterprise_install: slack_payload.is_enterprise_install,
+//       channel_id: slack_payload.channel.id,
+//       channel_name: slack_payload.channel.name,
+//       message_bot_id: slack_payload.message.bot_id,
+//       message_type: slack_payload.message.type,
+//       message_text: slack_payload.message.text,
+//       message_user: slack_payload.message.user,
+//       message_ts: slack_payload.message.ts,
+//       message_team: slack_payload.message.team,
+//       // message_blocks_block_1_type: slack_payload.message.blocks[0].type,
+//       // message_blocks_block_1_block_id: slack_payload.message.blocks[0].block_id,
+//       // message_blocks_block_1_text_type: slack_payload.message.blocks[0].text.type,
+//       // message_blocks_block_1_text_text: slack_payload.message.blocks[0].text.text,
+//       // message_blocks_block_1_text_emoji: slack_payload.message.blocks[0].text.emoji,
+//       // message_blocks_block_2_type: slack_payload.message.blocks[1].type,
+//       // message_blocks_block_2_block_id: slack_payload.message.blocks[1].block_id,
+//       // message_blocks_block_2_text_type: slack_payload.message.blocks[1].text.type,
+//       // message_blocks_block_2_text_text: slack_payload.message.blocks[1].text.text,
+//       // message_blocks_block_2_text_verbatim: slack_payload.message.blocks[1].text.verbatim,
+//       // message_blocks_block_2_accessory_type: slack_payload.message.blocks[1].accessory.type,
+//       // message_blocks_block_2_accessory_image_url: slack_payload.message.blocks[1].accessory.image_url,
+//       // message_blocks_block_2_accessory_alt_text: slack_payload.message.blocks[1].accessory.alt_text,
+//       // message_blocks_block_3_type: slack_payload.message.blocks[2].type,
+//       // message_blocks_block_3_block_id: slack_payload.message.blocks[2].block_id,
+//       // message_blocks_block_3_elements_1_type: slack_payload.message.blocks[2].elements[0].type,
+//       // message_blocks_block_3_elements_1_action_id: slack_payload.message.blocks[2].elements[0].action_id,
+//       // message_blocks_block_3_elements_1_text_type: slack_payload.message.blocks[2].elements[0].text.type,
+//       // message_blocks_block_3_elements_1_text_text: slack_payload.message.blocks[2].elements[0].text.text,
+//       // message_blocks_block_3_elements_1_text_emoji: slack_payload.message.blocks[2].elements[0].text.emoji,
+//       // message_blocks_block_3_elements_1_style: slack_payload.message.blocks[2].elements[0].style,
+//       // message_blocks_block_3_elements_1_value: slack_payload.message.blocks[2].elements[0].value,
+//       // message_blocks_block_3_elements_1_url: slack_payload.message.blocks[2].elements[0].url,
+//       state_values: slack_payload.state.values,
+//       response_url: slack_payload.response_url,
+//       actions_1_action_id: slack_payload.actions[0].action_id,
+//       actions_1_block_id: slack_payload.actions[0].block_id,
+//       actions_1_text_type: slack_payload.actions[0].text.type,
+//       actions_1_text_text: slack_payload.actions[0].text.text,
+//       actions_1_text_emoji: slack_payload.actions[0].text.emoji,
+//       actions_1_value: slack_payload.actions[0].value,
+//       actions_1_style: slack_payload.actions[0].style,
+//       actions_1_type: slack_payload.actions[0].type,
+//       actions_1_action_ts: slack_payload.actions[0].action_ts,
+//     }
+//     console.log('data'+ ' '+ data)
+//     // console.log("actionnnn" + response.json(data))
+//     // console.log(request.body)
+//     // change the url for bubble's url
+//     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
+//     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
+//     axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/initialize', data)
+//       .then((res) => {
+//         // console.log(res.headers);
+//         // console.log(`Status: ${res.status}`);
+//         // console.log('Body: action', res.data);
+//       }).catch((err) => {
+//         console.error(err);
+//       });
+//   }
+// )
