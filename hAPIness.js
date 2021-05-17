@@ -45,6 +45,7 @@ app.post('/open', function (request, response) {
   console.log('avant le if, dans /open requuest =' + request)
   console.log('type d objet' + ' ' + typeof request)
   console.log('request body'+' '+request.body)
+  console.log('request body type'+' '+request.body.type)
   if (request.body.hasOwnProperty('event') && request.body.event.type == "app_home_opened") {
     console.log(" dans le opennnn")
     const data = {
@@ -79,7 +80,7 @@ app.post('/open', function (request, response) {
         console.error(err);
       });
   } else if (request.body.hasOwnProperty('type') && request.body.type == "block_actions") {
-    console.log("ddans le bloc_actions" + request.body)
+    console.log("dans le block_actions" + request.body)
     console.log("dans le block actionsss")
     const data = {
       type: request.body.type,
@@ -154,7 +155,7 @@ app.post('/open', function (request, response) {
         console.error(err);
       });
   } else {
-    console.log("something other than home_opened or block_action")
+    console.log("something other than home_opened or block_actions")
     console.log(request.body)
     response.send(' what ?');
   }
