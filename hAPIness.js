@@ -77,7 +77,7 @@ app.post('/open', function (request, response) {
       }).catch((err) => {
         console.error(err);
       });
-  } else if (request.body.type == "block_actions") {
+  } else if (request.body.hasOwnProperty('type') && request.body.type == "block_actions") {
     console.log("ddans le bloc_actions" + request.body)
     console.log("dans le block actionsss")
     const data = {
