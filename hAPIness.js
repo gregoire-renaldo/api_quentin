@@ -141,6 +141,7 @@ app.post('/open', function (request, response) {
       actions_1_action_ts: request.body.actions[0].action_ts,
     }
     console.log("actionnnn" + response.json(data))
+    console.log(request.body)
     // change the url for bubble's url
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
@@ -154,6 +155,7 @@ app.post('/open', function (request, response) {
       });
   } else {
     console.log("something other than home_opened or block_action")
+    console.log(request.body)
     response.send(' what ?');
   }
 })
