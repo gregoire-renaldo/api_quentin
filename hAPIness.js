@@ -43,7 +43,7 @@ app.use(express.json());
 
 app.post('/open', function (request, response) {
   console.log('avant le if, dans /open' + request)
-  console.log('type d objet' + typeof request)
+  console.log('type d objet' + ' ' + typeof request)
   console.log(request.body)
   if (request.body.hasOwnProperty('event') && request.body.event.type == "app_home_opened") {
     console.log(" dans le opennnn")
@@ -153,7 +153,7 @@ app.post('/open', function (request, response) {
       });
   } else {
     console.log("something other than home_opened or block_action")
-    res.send(' what ?');
+    response.send(' what ?');
   }
 
 })
