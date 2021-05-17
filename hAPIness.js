@@ -42,6 +42,8 @@ app.use(express.json());
 // url to set on slack, not http://localhost:3000/actions ....
 
 app.post('/open', function (request, response) {
+  req = request
+  console.log('req' + req)
   console.log('avant le if, dans /open requuest =' + request)
   console.log('type d objet' + ' ' + typeof request)
   console.log('request body'+' '+request.body)
@@ -155,7 +157,6 @@ app.post('/open', function (request, response) {
     console.log("something other than home_opened or block_action")
     response.send(' what ?');
   }
-
 })
 
 // app.post('/open', function (request, response) {
