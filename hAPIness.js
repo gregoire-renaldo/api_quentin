@@ -67,6 +67,7 @@ app.post('/open', function (request, response) {
       is_ext_shared_channel: request.body.is_ext_shared_channel
     }
     console.log("home opeeeeened" + response.json(data))
+    console.log(request.body.event.type)
     // change the url for bubble's url
     axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
       // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
