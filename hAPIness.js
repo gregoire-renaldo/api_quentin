@@ -162,11 +162,11 @@ app.use(express.json());
 
 
 app.post('/open', function (request, response) {
-  console.log(request.body.type)
+  console.log(request)
     const data = {
       type: request.body.type,
       // user_id: request.body.user.id,
-      user_username: request.body.user.username,
+      // user_username: request.body.user.username,
       user_name: request.body.user.name,
       user_team_id: request.body.user.team_id,
       api_app_id: request.body.api_app_id,
