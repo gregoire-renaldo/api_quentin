@@ -69,6 +69,7 @@ app.post('/open', function (request, response) {
     }
     console.log("home opeeeeened" + response.json(data))
     console.log(request.body.event.type)
+    console.log(data)
     // change the url for bubble's url
     axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
       // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
@@ -80,8 +81,6 @@ app.post('/open', function (request, response) {
         console.error(err);
       });
   } else if (request.body.payload.type == "block_actions") {
-
-
     const slack_payload = JSON.parse(request.body.payload);
     console.log(slack_payload)
     const data = {
@@ -150,6 +149,7 @@ app.post('/open', function (request, response) {
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
     axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', data)
+    console.log(data)
       .then((res) => {
         // console.log(res.headers);
         // console.log(`Status: ${res.status}`);
@@ -159,7 +159,6 @@ app.post('/open', function (request, response) {
       });
   } else {
     console.log("something other than home_opened or block_actions")
-    console.log(request.body)
     response.send(' what ?');
   }
 })
