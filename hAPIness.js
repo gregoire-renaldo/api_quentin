@@ -42,8 +42,9 @@ app.use(express.json());
 // url to set on slack, not http://localhost:3000/actions ....
 
 app.post('/open', function (request, response) {
-  const req = JSON.parse(request);
-  console.log('req' + req)
+  req = request
+  const req_json = JSON.parse(request);
+  console.log('req_json' + req_json)
 
 
   console.log('avant le if, dans /open requuest =' + request)
