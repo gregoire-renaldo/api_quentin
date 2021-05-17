@@ -43,8 +43,9 @@ app.use(express.json());
 
 app.post('/open', function (request, response) {
   console.log('avant le if, dans /open' + request)
+  console.log('type d objet' + request.type)
   console.log(request.body)
-  if ("type" in request.body.event && request.body.event.type == "app_home_opened") {
+  if ( request.body.event.type == "app_home_opened") {
     console.log("opennnn")
     const data = {
       token: request.body.token,
