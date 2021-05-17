@@ -43,7 +43,7 @@ app.use(express.json());
 
 app.post('/open', function (request, response) {
   req = request
-  const req_json = JSON.parse(request);
+
   console.log('req_json' + req_json)
 
 
