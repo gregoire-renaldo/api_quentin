@@ -42,8 +42,6 @@ app.use(express.json());
 
 
 app.post('/open', function (request, response) {
-  req = request
-  console.log('req_json' + req)
   console.log('avant le if, dans /open requuest =' + request)
   console.log('type d objet' + ' ' + typeof request)
   console.log('request body'+' '+request.body)
