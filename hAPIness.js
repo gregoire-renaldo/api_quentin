@@ -42,7 +42,7 @@ app.use(express.json());
 // url to set on slack, not http://localhost:3000/actions ....
 
 app.post('/open', function (request, response) {
-  console.log('avant le if, dans /open')
+  console.log('avant le if, dans /open' + request)
   console.log(request.body)
   if (request.body.event.type == "app_home_opened") {
     console.log("opennnn")
