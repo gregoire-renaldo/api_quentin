@@ -199,7 +199,7 @@ app.post('/open', function (request, response) {
   console.log('avant le if, dans /open request =' + request)
   console.log('type d objet' + ' ' + typeof request)
   for (var property in req) {
-    alert(property + "=" + req[property]);
+    console.log(property + "=" + req[property]);
   }
   console.log('request body'+' '+request.body)
   console.log(request.body);
