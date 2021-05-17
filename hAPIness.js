@@ -11,12 +11,12 @@ const axios = require('axios');
 // pour tester lancer ngrok sur port 3000 ./ngrok http 3000  (simule un serveur)
 // https://d7335118911c.ngrok.io/open
 
-// Nous définissons ici les paramètres du serveur.
 const PORT = process.env.PORT || 3000
 const app = express();
 // Démarrer le serveur
 app.listen(PORT, () => console.log(`Listening on ${PORT}`))
 
+// TO set for slack verif, then to comment
 // Start a basic HTTP server
 // slackEvents.start(PORT).then(() => {
 //   // Listening on path '/slack/events' by default
@@ -46,7 +46,7 @@ app.post('/open', function (request, response) {
   console.log('type d objet' + typeof request)
   console.log(request.body)
   if (request.body.hasOwnProperty('event') && request.body.event.type == "app_home_opened") {
-    console.log("opennnn")
+    console.log(" dans le opennnn")
     const data = {
       token: request.body.token,
       team_id: request.body.team_id,
@@ -78,7 +78,8 @@ app.post('/open', function (request, response) {
         console.error(err);
       });
   } else if (request.body.type == "block_actions") {
-    console.log("block actionsss")
+    console.log("ddans le bloc_actions" + request.body)
+    console.log("dans le block actionsss")
     const data = {
       type: request.body.type,
       user_id: request.body.user.id,
@@ -152,6 +153,7 @@ app.post('/open', function (request, response) {
       });
   } else {
     console.log("something other than home_opened or block_action")
+    res.send(' what ?');
   }
 
 })
