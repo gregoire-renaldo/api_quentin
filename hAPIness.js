@@ -44,7 +44,7 @@ app.use(express.json());
 app.post('/open', function (request, response) {
   console.log('avant le if, dans /open' + request)
   console.log(request.body)
-  if (request.body.event.type == "app_home_opened") {
+  if (request.body.event.type != 'undefined' && request.body.event.type == "app_home_opened") {
     console.log("opennnn")
     const data = {
       token: request.body.token,
@@ -138,7 +138,6 @@ app.post('/open', function (request, response) {
       actions_1_action_ts: request.body.actions[0].action_ts,
     }
     console.log("actionnnn" + response.json(data))
-
     // change the url for bubble's url
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
