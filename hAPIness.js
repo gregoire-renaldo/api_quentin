@@ -80,8 +80,8 @@ app.post('/open', function (request, response) {
       }).catch((err) => {
         console.error(err);
       });
-  } else if( (req_json.payload.type) == "block_actions") {
-    console.log('dans le else if')
+  } else {
+    console.log('dans le else ')
     const slack_payload = JSON.parse(request.body.payload);
     console.log(slack_payload)
     const data = {
@@ -158,9 +158,6 @@ app.post('/open', function (request, response) {
       }).catch((err) => {
         console.error(err);
       });
-  } else {
-    console.log("something other than home_opened or block_actions")
-    response.send(' what ?');
   }
 })
 
