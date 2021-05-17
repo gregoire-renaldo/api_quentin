@@ -44,7 +44,7 @@ app.use(express.json());
 app.post('/open', function (request, response) {
   req = request
 
-  console.log('req_json' + req_json)
+  console.log('req_json' + req)
 
 
   console.log('avant le if, dans /open requuest =' + request)
