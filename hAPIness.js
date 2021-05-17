@@ -47,8 +47,7 @@ app.post('/open', function (request, response) {
   console.log('avant le if, dans /open requuest =' + request)
   console.log('type d objet' + ' ' + typeof request)
   console.log('request body'+' '+request.body)
-  // request.body.hasOwnProperty('event') &&
-  if (request.body.event.type == "app_home_opened") {
+  if (request.body.hasOwnProperty('event') && request.body.event.type == "app_home_opened") {
     console.log(" dans le opennnn")
     const data = {
       token: request.body.token,
