@@ -139,6 +139,8 @@ app.post('/open', function (request, response) {
         // console.log(resp.data);
 
     };
+  }
+)
 
 
     // console.log(response)
@@ -151,8 +153,6 @@ app.post('/open', function (request, response) {
     //   }).catch((err) => {
     //     console.error(err);
     //   });
-  }
-})
 
 
 
