@@ -134,11 +134,16 @@ app.post('/open', function (request, response) {
       actions_1_type: slack_payload.actions[0].type,
       actions_1_action_ts: slack_payload.actions[0].action_ts,
     }
-
+    let axiosConfig = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        "Access-Control-Allow-Origin": "*",
+      }
+    };
     const sendPostRequest = async () => {
       try {
         console.log('AAAAAAAAAAAAAAvant le post axiiiiiiiiiiooooooooooosssssssssssss')
-        const resp = await axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', dataPost);
+        const resp = await axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', dataPost, axiosConfig);
         console.log('aprèssssssss le post axios !!!')
         // console.log(resp.data);
       } catch (err) {
@@ -150,6 +155,7 @@ app.post('/open', function (request, response) {
       }
     };
     sendPostRequest();
+
     // console.log(response)
     // change the url for bubble's url
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
