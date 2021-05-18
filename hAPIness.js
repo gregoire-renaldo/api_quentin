@@ -140,6 +140,9 @@ app.post('/open', function (request, response) {
         const resp = await axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', dataPost);
         console.log('aprèssssssss le post axios !!!')
         // console.log(resp.data);
+      } finally {
+          response.sendStatus(200)
+        }
       } catch (err) {
         console.error(err);
       }
