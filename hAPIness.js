@@ -148,10 +148,10 @@ app.post('/open', function (request, response) {
     // change the url for bubble's url
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
+    res.sendStatus(200);
     axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', data)
     console.log(data)
       .then((res) => {
-        res.sendStatus(200);
       }).catch((err) => {
         console.error(err);
       });
