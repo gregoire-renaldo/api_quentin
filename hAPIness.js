@@ -142,7 +142,7 @@ app.post('/open', function (request, response) {
         // console.log(resp.data);
       } finally {
           response.sendStatus(200)
-        }
+
       } catch (err) {
         console.error(err);
       }
