@@ -1,5 +1,4 @@
 require('dotenv').config()
-// this is my index.js
 const express = require('express');
 
 // from slack api event https://github.com/slackapi/node-slack-sdk
@@ -41,7 +40,6 @@ app.get('/', (req, res) => {
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 app.post('/open', function (request, response) {
   console.log('avant le if, dans /open requuest =' + request)
   if (request.body.hasOwnProperty('event') && request.body.event.type == "app_home_opened") {
@@ -67,12 +65,9 @@ app.post('/open', function (request, response) {
     }
     console.log("home opeeeeened" + response.json(data))
     console.log(request.body.event.type)
-    // change the url for bubble's url
     axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
       // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
       .then((res) => {
-        // console.log(res.headers);
-        // console.log(`Status: ${res.status}`);
       }).catch((err) => {
         console.error(err);
       });
@@ -141,17 +136,14 @@ app.post('/open', function (request, response) {
     }
     const sendPostRequest = async () => {
       try {
-        const resp = await axios.post('https://jsonplaceholder.typicode.com/posts', dataPost);
+        const resp = await axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', dataPost);
         console.log(resp.data);
       } catch (err) {
-        // Handle Error Here
         console.error(err);
       }
     };
-
     sendPostRequest();
     response.sendStatus(200)
-
     // change the url for bubble's url
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
     // response.status(200).send('OK')
