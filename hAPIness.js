@@ -135,9 +135,11 @@ app.post('/open', function (request, response) {
       actions_1_type: slack_payload.actions[0].type,
       actions_1_action_ts: slack_payload.actions[0].action_ts,
     }
+    console.log("home opeeeeened" + response.json(dataPost))
     console.log('response'+' '+ response)
     axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', dataPost)
       .then((res) => {
+        res.end()
       }).catch((err) => {
         console.error(err);
       });
