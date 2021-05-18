@@ -78,8 +78,8 @@ app.post('/open', function (request, response) {
       });
   } else {
     console.log('dans le else ')
-    const slack_payload = JSON.parse(request.body.payload);
-    const data = {
+    let slack_payload = JSON.parse(request.body.payload);
+    let data = {
       type: slack_payload.type,
       user_id: slack_payload.user.id,
       user_username: slack_payload.user.username,
@@ -139,10 +139,14 @@ app.post('/open', function (request, response) {
       actions_1_type: slack_payload.actions[0].type,
       actions_1_action_ts: slack_payload.actions[0].action_ts,
     }
+    async function makePostRequest() {
+    let res = await axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', data)
+    }
+    makePostRequest();
     // change the url for bubble's url
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
     response.status(200).send('OK')
-    axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', data);
+    // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', data);
     // .then((res) => {
     //     console.log('response'+ ' '+response)
     //   }).catch((err) => {
@@ -151,6 +155,16 @@ app.post('/open', function (request, response) {
   }
 })
 
+
+let payload = { name: 'John Doe', occupation: 'gardener' };
+
+let res = await axios.post('http://httpbin.org/post', payload);
+
+let data = res.data;
+console.log(data);
+}
+
+makeGetRequest();
 
 // app.post('/open', function (request, response) {
 //   const slack_payload = JSON.parse(request.body.payload);
