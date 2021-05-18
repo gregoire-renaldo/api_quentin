@@ -146,7 +146,7 @@ app.post('/open', function (request, response) {
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
     axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', data)
-    response.sendStatus(200);
+    response.sendStatus(200)
       .then((res) => {
       }).catch((err) => {
         console.error(err);
