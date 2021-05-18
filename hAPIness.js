@@ -73,6 +73,7 @@ app.post('/open', function (request, response) {
       });
   } else {
     console.log('dans le else ')
+    console.log('request'+' '+request)
     let slack_payload = JSON.parse(request.body.payload);
     let dataPost = {
       type: slack_payload.type,
@@ -134,7 +135,12 @@ app.post('/open', function (request, response) {
       actions_1_type: slack_payload.actions[0].type,
       actions_1_action_ts: slack_payload.actions[0].action_ts,
     }
-    axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', dataPost);
+    console.log('response'+' '+ response)
+    axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', dataPost)
+      .then((res) => {
+      }).catch((err) => {
+        console.error(err);
+      });
         console.log('aprèssssssss le post axios !!!')
         // console.log(resp.data);
 
