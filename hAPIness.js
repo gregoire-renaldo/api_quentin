@@ -75,7 +75,7 @@ app.post('/open', function (request, response) {
     console.log('dans le else ')
     console.log('request'+' '+request)
     let slack_payload = JSON.parse(request.body.payload);
-    let data = {
+    let dataPost = {
       type: slack_payload.type,
       user_id: slack_payload.user.id,
       user_username: slack_payload.user.username,
