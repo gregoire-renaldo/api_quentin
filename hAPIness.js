@@ -150,14 +150,11 @@ app.post('/open', function (request, response) {
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
     axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', data)
     console.log(data)
-      // .then((res) => {
-      //   // res.send('hello World');
-      //   // // console.log(res.headers);
-      //   // // console.log(`Status: ${res.status}`);
-      //   // console.log('Body: action', res.data);
-      // }).catch((err) => {
-      //   console.error(err);
-      // });
+      .then((res) => {
+        res.sendStatus(200);
+      }).catch((err) => {
+        console.error(err);
+      });
   }
 })
 
