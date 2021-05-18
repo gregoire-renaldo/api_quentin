@@ -145,7 +145,7 @@ app.post('/open', function (request, response) {
     makePostRequest();
     // change the url for bubble's url
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
-    response.status(200).send('OK')
+    // response.status(200).send('OK')
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', data);
     // .then((res) => {
     //     console.log('response'+ ' '+response)
