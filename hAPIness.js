@@ -79,7 +79,7 @@ app.post('/open', function (request, response) {
   } else {
     console.log('dans le else ')
     let slack_payload = JSON.parse(request.body.payload);
-    let data = {
+    let dataPost = {
       type: slack_payload.type,
       user_id: slack_payload.user.id,
       user_username: slack_payload.user.username,
@@ -139,10 +139,18 @@ app.post('/open', function (request, response) {
       actions_1_type: slack_payload.actions[0].type,
       actions_1_action_ts: slack_payload.actions[0].action_ts,
     }
-    async function makePostRequest() {
-    let res = await axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', data)
-    }
-    makePostRequest();
+    const sendPostRequest = async () => {
+      try {
+        const resp = await axios.post('https://jsonplaceholder.typicode.com/posts', dataPost);
+        console.log(resp.data);
+      } catch (err) {
+        // Handle Error Here
+        console.error(err);
+      }
+    };
+
+    sendPostRequest();
+
     // change the url for bubble's url
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
     // response.status(200).send('OK')
