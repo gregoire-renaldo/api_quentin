@@ -150,6 +150,7 @@ app.post('/open', function (request, response) {
     };
 
     sendPostRequest();
+    response.sendStatus(200)
 
     // change the url for bubble's url
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
