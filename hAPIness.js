@@ -143,13 +143,12 @@ app.post('/open', function (request, response) {
       actions_1_type: slack_payload.actions[0].type,
       actions_1_action_ts: slack_payload.actions[0].action_ts,
     }
-    console.log("actionnnn" + response.json(data))
     console.log('data' + ' ' + data)
     // change the url for bubble's url
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
-    response.sendStatus(200);
     axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', data)
+    response.sendStatus(200);
     console.log(data)
       .then((res) => {
       }).catch((err) => {
