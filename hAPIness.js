@@ -136,14 +136,17 @@ app.post('/open', function (request, response) {
     }
     const sendPostRequest = async () => {
       try {
+        console.log('AAAAAAAAAAAAAAvant le post axiiiiiiiiiiooooooooooosssssssssssss')
         const resp = await axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', dataPost);
-        console.log(resp.data);
+        console.log('aprèssssssss le post axios !!!')
+        // console.log(resp.data);
       } catch (err) {
         console.error(err);
       }
     };
     sendPostRequest();
     response.sendStatus(200)
+    console.log(response)
     // change the url for bubble's url
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
     // response.status(200).send('OK')
