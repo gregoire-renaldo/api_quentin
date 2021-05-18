@@ -137,11 +137,11 @@ app.post('/open', function (request, response) {
     }
     console.log('response'+' '+ response)
     axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', dataPost)
+    console.log('aprèssssssss le post axios !!!')
       .then((res) => {
       }).catch((err) => {
         console.error(err);
       });
-        console.log('aprèssssssss le post axios !!!')
         // console.log(resp.data);
 
     };
