@@ -141,13 +141,13 @@ app.post('/open', function (request, response) {
     }
     // change the url for bubble's url
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
-    // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', data);
-    res.status(200).send('OK')
-    .then((res) => {
-        console.log('response'+ ' '+response)
-      }).catch((err) => {
-        console.error(err);
-      });
+    axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', data);
+    response.status(200).send('OK')
+    // .then((res) => {
+    //     console.log('response'+ ' '+response)
+    //   }).catch((err) => {
+    //     console.error(err);
+    //   });
   }
 })
 
