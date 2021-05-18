@@ -44,8 +44,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/open', function (request, response) {
   console.log('avant le if, dans /open requuest =' + request)
-  console.log('type d objet' + ' ' + typeof request)
-  console.log('request body'+' '+request.body)
   if (request.body.hasOwnProperty('event') && request.body.event.type == "app_home_opened") {
     console.log(" dans le opennnn")
     const data = {
@@ -69,7 +67,6 @@ app.post('/open', function (request, response) {
     }
     console.log("home opeeeeened" + response.json(data))
     console.log(request.body.event.type)
-    console.log(data)
     // change the url for bubble's url
     axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
       // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
@@ -146,8 +143,9 @@ app.post('/open', function (request, response) {
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
     // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
     axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', data)
-    response.sendStatus(200)
-      .then((res) => {
+    .then((res) => {
+        response.sendStatus(200)
+        console.log(response)
       }).catch((err) => {
         console.error(err);
       });
