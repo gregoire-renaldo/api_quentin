@@ -134,17 +134,19 @@ app.post('/open', function (request, response) {
       actions_1_type: slack_payload.actions[0].type,
       actions_1_action_ts: slack_payload.actions[0].action_ts,
     }
+
     const sendPostRequest = async () => {
       try {
         console.log('AAAAAAAAAAAAAAvant le post axiiiiiiiiiiooooooooooosssssssssssss')
         const resp = await axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', dataPost);
         console.log('aprèssssssss le post axios !!!')
         // console.log(resp.data);
-      } finally {
-          response.sendStatus(200)
-
       } catch (err) {
         console.error(err);
+      } finally {
+        console.log('avant le sttut 200')
+        response.sendStatus(200)
+        console.log('après le satut 200')
       }
     };
     sendPostRequest();
