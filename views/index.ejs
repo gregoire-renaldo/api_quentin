@@ -9,6 +9,35 @@
 <body>
   <div class="container">
   <h1 class="text-center">Rouleau compresseur</h1>
+  <h2>Active url <%= active_redir%></h2>
+
+<div>
+  <h3> form pour update dev/prod</h3>
+  <form action="/change_bubble_endpoint" method="post">
+
+    <label for="urlEndpoint">Enter url: </label>
+    <input list="urlEndpoint" id="urlEndpoint2" name="choice" />
+
+    <datalist id="urlEndpoint2">
+      <option value=<%=devUrl %>>DEV</option>
+      <option value=<%=prodUrl %>>PROD</option>
+    </datalist>
+
+    <input type="submit" value="Chang dev or prod">
+
+  </form>
+</div>
+
+  <div>
+    <h3>mini form pour ajouter données en db</h3>
+    <form action="/bubble_endpoint/" method="post">
+      <label for="mode">Enter mode: </label>
+      <input id="mode" type="text" name="mode" value="Mode dev ou prod">
+      <label for="urlEndpoint">Enter url: </label>
+      <input id="urlEndpoint" type="text" name="urlEndpoint" value="urlEndpoint">
+      <input type="submit" value="Send in db">
+    </form>
+  </div>
     <div class="my-2">
       <p>App_home_opened : Ouverture par un utilisateur de l'app sur slack</p>
       <p>https://aqueous-ridge-83103.herokuapp.com/open est prêt à recçevoir le post de Slack</p>

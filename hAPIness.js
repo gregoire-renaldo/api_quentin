@@ -1,5 +1,7 @@
-require('dotenv').config()
+require('dotenv').config();
 const express = require('express');
+const mongoose = require('mongoose');
+const Setup = require('./models/Setup')
 
 // from slack api event https://github.com/slackapi/node-slack-sdk
 const { createEventAdapter } = require('@slack/events-api');
@@ -15,6 +17,15 @@ const app = express();
 // Démarrer le serveur
 app.listen(PORT, () => console.log(`Listening on ${PORT}`))
 
+mongoose.connect(process.env.DB_CONNECTION,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log('Connexion à MongoDB réussie !'))
+  .catch(() => console.log('Connexion à MongoDB échouée !'));
+
+
 // TO set for slack verif, then to comment
 // Start a basic HTTP server
 // slackEvents.start(PORT).then(() => {
@@ -23,6 +34,8 @@ app.listen(PORT, () => console.log(`Listening on ${PORT}`))
 // });
 
 app.use(express.static('public'));
+app.set('views', './views')
+app.set('view engine', 'ejs')
 
 // Attach listeners to events by Slack Event "type". See: https://api.slack.com/events/message.im
 // slackEvents.on('message', (event) => {
@@ -31,15 +44,73 @@ app.use(express.static('public'));
 // Handle errors (see `errorCodes` export)
 slackEvents.on('error', console.error);
 
-app.get('/', (req, res) => {
-  console.log('saluttttttt')
-  res.send('hello World');
-});
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const devUrl = 'https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/'
+const prodUrl = 'https://joypool12.bubbleapps.io/api/1.1/wf/endpoint-rc/'
+
+// pour set le mode dev ou prod: on vérifie quel mode, il va servir de parametre
+let bubbleUrl = Setup.find({ mode: 'active' }, function (err, docs) {
+  if (err) {
+    console.log(err);
+  }
+  else {
+    console.log("First function call : ", docs[0].urlEndpoint);
+    bubbleUrl = docs[0].urlEndpoint
+  }
+});
+
+console.log('this is bubbleUrl' + bubbleUrl)
+
+// pour creer les modes dev & prod
+app.post('/bubble_endpoint', (req, res, next) => {
+  const setup = new Setup({
+    ...req.body
+  });
+  setup.save()
+    .then(() => res.status(201).json({ message: 'Object added' }))
+    .catch(error => res.status(400).json({ error }))
+});
+
+
+
+// pour update active mode en db
+app.put('/change_bubble_endpoint', (req, res, next) => {
+  console.log(req.body)
+  Setup.updateOne({ mode: 'active'}, { ...req.body})
+  .then(() => res.status(200).json({ message: 'Objet modifié !'}) )
+  .catch(error => res.status(400).json({ error }))
+})
+
+
+
+
+
+// route to update mongodb value -- update
+// create the 2 values in mongo-db
+  //  1 button with route to update to dev
+  // 1 button to update route to prod
+
+
+// add in the view button to switch
+// display the value in the view
+
+app.get('/salut', (req, res) => {
+  console.log('saluttttttt')
+  console.log(bubbleUrl)
+  res.send('hello World');
+});
+
+app.get('',(req,res) => {
+  res.render('index', { active_redir: bubbleUrl, devUrl: devUrl, prodUrl: prodUrl })
+})
+
+
 app.post('/open', function (request, response) {
+  // let bubbleUrl = mongoose variable
+  // replace string url with bubbleUrl
   console.log('avant le if, dans /open requuest =' + request)
   if (request.body.hasOwnProperty('event') && request.body.event.type == "app_home_opened") {
     console.log(" dans le opennnn")
