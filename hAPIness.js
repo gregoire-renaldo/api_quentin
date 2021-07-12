@@ -62,9 +62,9 @@ app.post('/open', function (request, response) {
       authorizations_is_enterprise_install: request.body.authorizations[0].is_enterprise_install,
       is_ext_shared_channel: request.body.is_ext_shared_channel
     }
-    console.log("home opeeeeened" + response.json(data))
+    console.log("home opeeeeenedd" + response.json(data))
     console.log(request.body.event.type)
-    axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
+    axios.post('https://joypool12.bubbleapps.io/api/1.1/wf/endpoint-rc/', data)
       // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
       .then((res) => {
       }).catch((err) => {
