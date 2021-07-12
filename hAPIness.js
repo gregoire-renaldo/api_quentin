@@ -77,15 +77,13 @@ app.post('/bubble_endpoint', (req, res, next) => {
 
 
 // pour update active mode en db
-app.put('/change_bubble_endpoint', (req, res, next) => {
+app.post('/change_bubble_endpoint', (req, res, next) => {
   console.log(req.body)
   Setup.updateOne({ mode: 'active'}, { ...req.body})
-  .then(() => res.status(200).json({ message: 'Objet modifié !'}) )
+  .then(
+    () => res.status(200).json({ message: 'Objet modifié !'}) )
   .catch(error => res.status(400).json({ error }))
 })
-
-
-
 
 
 // route to update mongodb value -- update
@@ -99,8 +97,17 @@ app.put('/change_bubble_endpoint', (req, res, next) => {
 
 app.get('/salut', (req, res) => {
   console.log('saluttttttt')
+  let bubbleUrl = Setup.find({ mode: 'active' }, function (err, docs) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      console.log("First function call : ", docs[0].urlEndpoint);
+      bubbleUrl = docs[0].urlEndpoint
+    }
+  });
   console.log(bubbleUrl)
-  res.send('hello World');
+  res.send('go back to home !!');
 });
 
 app.get('',(req,res) => {
@@ -135,10 +142,11 @@ app.post('/open', function (request, response) {
     }
     console.log("home opeeeeened" + response.json(data))
     console.log(request.body.event.type)
-    axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/', data)
+    axios.post(bubbleUrl, data)
       // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
       .then((res) => {
-      }).catch((err) => {
+      })
+      .catch((err) => {
         console.error(err);
       });
   } else {
@@ -207,7 +215,7 @@ app.post('/open', function (request, response) {
       actions_1_action_ts: slack_payload.actions[0].action_ts,
     }
     console.log('response'+' '+ response)
-    axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-action/', dataPost)
+    axios.post(bubbleUrl, dataPost)
       .then((res) => {
       }).catch((err) => {
         console.error(err);
