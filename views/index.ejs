@@ -7,28 +7,44 @@
 </head>
 
 <body>
-  <div class="container">
-  <h1 class="text-center">Rouleau compresseur</h1>
-  <h2>Active url <%= active_redir%></h2>
+  <div class="container ">
+    <div class="text-center">
+      <h1 >Rouleau compresseur</h1>
+      to change the redirection of the api to Bubble
+      <ul style="list-style: none;">
+        <li>1/choose the mode you want, dev or prod</li>
+        <li>2/ go back to the home page</li>
+        <li>3/ click on the button to exec the changes</li>
+      </ul>
+        <h2>Mode redirection Bubble :
+          <% if (active_redir==devUrl) { %>
+              dev
+          <% } else if (active_redir==prodUrl) { %>
+              prod
+          <% } %>
+        </h2>
 
-<div>
-  <h3> form pour update dev/prod</h3>
-  <form action="/change_bubble_endpoint" method="post">
+        <form action="/change_bubble_endpoint" method="post">
+          <label for="urlEndpoint">Enter mode: </label>
+          <input list="urlEndpoint2" id="url" name="urlEndpoint" required/>
+          <datalist id="urlEndpoint2">
+            <select>
+              <option label="dev">
+                <%=devUrl %>
+              </option>
+              <option label="prod">
+                <%=prodUrl %>
+              </option>
+            </select>
+          </datalist>
+          <input type="submit" value="Chang dev or prod">
+        </form>
+        <p>wait for 5s, then click untill you see the mode you've just set up</p>
+        <a class="btn btn-primary mb-3" href="/change">click to finish change the back</a>
+      </div>
 
-    <label for="urlEndpoint">Enter url: </label>
-    <input list="urlEndpoint" id="urlEndpoint2" name="urlEndpoint" />
 
-    <datalist id="urlEndpoint2">
-      <option value=<%=devUrl %>>DEV</option>
-      <option value=<%=prodUrl %>>PROD</option>
-    </datalist>
-
-    <input type="submit" value="Chang dev or prod">
-
-  </form>
-</div>
-<a href="http://localhost:3000/salut">click to change the back</a>
-  <div>
+  <!-- <div>
     <h3>mini form pour ajouter données en db</h3>
     <form action="/bubble_endpoint/" method="post">
       <label for="mode">Enter mode: </label>
@@ -37,31 +53,19 @@
       <input id="urlEndpoint" type="text" name="urlEndpoint" value="urlEndpoint">
       <input type="submit" value="Send in db">
     </form>
-  </div>
-    <div class="my-2">
-      <p>App_home_opened : Ouverture par un utilisateur de l'app sur slack</p>
-      <p>https://aqueous-ridge-83103.herokuapp.com/open est prêt à recçevoir le post de Slack</p>
-      <p class="text-center"><a href="https://aqueous-ridge-83103.herokuapp.com/open">App_home_opened</a></p>
-      <p>puis redirection vers https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/ à modifier dans le code</p>
-    </div>
-    <div>
-      <p class="mt-5">Actions : Clic sur un bouton contenu dans un message sur slack</p>
-      <p>https://aqueous-ridge-83103.herokuapp.com/actions est prêt à reçevoir le post de Slack</p>
-      <p class="text-center"><a href="https://aqueous-ridge-83103.herokuapp.com/actions">Actions</a></p>
-      <p>puis redirection vers https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/ à modifier dans le code</p>
-    </div>
+  </div> -->
     <div>
       <pre class="prettyprint">
         <code class="language-javascript">
           {
           "type": "app_home_opened",
-          "user": "U061F7AUR",
-          "channel": "D0LAN2Q65",
+          "user": "XXXXXXXXX",
+          "channel": "XXXXXXXXX",
           "event_ts": "1515449522000016",
           "tab": "home",
           "view": {
-            "id": "VPASKP233",
-            "team_id": "T21312902",
+            "id": "XXXXXXXXX",
+            "team_id": "XXXXXXXXX",
             "type": "home",
             "private_metadata": "",
             "callback_id": "",
@@ -69,10 +73,10 @@
             "clear_on_close": false,
             "notify_on_close": false,
             "root_view_id": "VPASKP233",
-            "app_id": "A21SDS90",
+            "app_id": "XXXXXXXXX",
             "external_id": "",
-            "app_installed_team_id": "T21312902",
-            "bot_id": "BSDKSAO2"
+            "app_installed_team_id": "XXXXXXXXX",
+            "bot_id": "XXXXXXXXX"
             }
           }
         </code>
@@ -80,41 +84,41 @@
     </div>
     <div class="my-2">
       <pre class="prettyprint">
-        <code class="anguage-javascript">
+        <code class="language-javascript">
           {
           "type": "block_actions",
           "user": {
-            "id": "U016303JRMW",
-            "username": "cissequentin1",
-            "name": "cissequentin1",
-            "team_id": "T015D4X6P1Q"
+            "id": "XXXXXXXXX",
+            "username": "XXXXXXXXX",
+            "name": "XXXXXXXXX",
+            "team_id": "XXXXXXXXX"
             },
-            "api_app_id": "A01K2K0H2F3",
-            "token": "cZ8ai0KssmiDnX5DVC3AFAxF",
+            "api_app_id": "XXXXXXXXX",
+            "token": "XXXXXXXXX",
             "container": {
             "type": "message",
             "message_ts": "1617090941.000100",
-            "channel_id": "C01SQ7530AX",
+            "channel_id": "XXXXXXXXX",
             "is_ephemeral": false
             },
             "trigger_id": "1905541386486.1183167227058.55f04e103ba91861be376bdce93ee264",
             "team": {
-            "id": "T015D4X6P1Q",
-            "domain": "joypool"
+            "id": "XXXXXXXXX",
+            "domain": "XXXXXXXXX"
             },
             "enterprise": null,
             "is_enterprise_install": false,
             "channel": {
-            "id": "C01SQ7530AX",
-            "name": "la_gan_s_pd"
+            "id": "XXXXXXXXX",
+            "name": "XXXXXXXXX"
             },
             "message": {
-            "bot_id": "B01JH7B1FHC",
+            "bot_id": "XXXXXXXXX",
             "type": "message",
             "text": ":sunny: Nouveau moment publi\u00e9",
-            "user": "U01J97E90TZ",
+            "user": "XXXXXXXXX",
             "ts": "1617090941.000100",
-            "team": "T015D4X6P1Q",
+            "team": "XXXXXXXXX",
             "blocks": [
               {
             "type": "section",
@@ -154,7 +158,7 @@
             },
             "style": "primary",
             "value": "click_me_123",
-            "url": "https:\/\/joypool.fr\/version-test\/user_event_detail\/1617090910231x792791587440296000"
+            "url": "XXXXXXXXX"
             }
           ]
           }
@@ -163,7 +167,7 @@
           "state": {
           "values": {}
           },
-          "response_url": "https:\/\/hooks.slack.com\/actions\/T015D4X6P1Q\/1897546064343\/PKW0OwsOPPzLGhABXORc1K4i",
+          "response_url": "https:\/\/hooks.slack.com\/actions\XXXXXXXXX",
           "actions": [
             {
             "action_id": "actionId-0",
@@ -184,7 +188,6 @@
       </pre>
     </div>
 </div>
-
 </body>
 <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
 </html>

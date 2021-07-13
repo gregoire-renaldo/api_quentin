@@ -9,12 +9,9 @@ const slackEvents = createEventAdapter(process.env.SLACK_SIGNING_SECRET);
 
 const bodyParser = require("body-parser");
 const axios = require('axios');
-// pour tester lancer ngrok sur port 3000 ./ngrok http 3000  (simule un serveur)
-// https://d7335118911c.ngrok.io/open
 
 const PORT = process.env.PORT || 3000
 const app = express();
-// Démarrer le serveur
 app.listen(PORT, () => console.log(`Listening on ${PORT}`))
 
 mongoose.connect(process.env.DB_CONNECTION,
@@ -25,33 +22,17 @@ mongoose.connect(process.env.DB_CONNECTION,
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-
-// TO set for slack verif, then to comment
-// Start a basic HTTP server
-// slackEvents.start(PORT).then(() => {
-//   // Listening on path '/slack/events' by default
-//   console.log(`server listening on port ${PORT}`);
-// });
-
 app.use(express.static('public'));
 app.set('views', './views')
 app.set('view engine', 'ejs')
 
-// Attach listeners to events by Slack Event "type". See: https://api.slack.com/events/message.im
-// slackEvents.on('message', (event) => {
-//   console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text}`);
-// });
-// Handle errors (see `errorCodes` export)
-slackEvents.on('error', console.error);
-
-
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const devUrl = 'https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/'
-const prodUrl = 'https://joypool12.bubbleapps.io/api/1.1/wf/endpoint-rc/'
+const devUrl = process.env.DEV_URL
+const prodUrl = process.env.PROD_URL
 
-// pour set le mode dev ou prod: on vérifie quel mode, il va servir de parametre
+// pour set le mode dev ou prod
 let bubbleUrl = Setup.find({ mode: 'active' }, function (err, docs) {
   if (err) {
     console.log(err);
@@ -61,6 +42,7 @@ let bubbleUrl = Setup.find({ mode: 'active' }, function (err, docs) {
     bubbleUrl = docs[0].urlEndpoint
   }
 });
+
 
 console.log('this is bubbleUrl' + bubbleUrl)
 
@@ -74,30 +56,23 @@ app.post('/bubble_endpoint', (req, res, next) => {
     .catch(error => res.status(400).json({ error }))
 });
 
-
-
 // pour update active mode en db
 app.post('/change_bubble_endpoint', (req, res, next) => {
   console.log(req.body)
-  Setup.updateOne({ mode: 'active'}, { ...req.body})
-  .then(
-    () => res.status(200).json({ message: 'Objet modifié !'}) )
+  Setup.updateOne({ mode: 'active'}, { ...req.body}).then(
+    () => {
+      res.status(200).json({ message: 'Endpoint modifié ! go to https://aqueous-ridge-83103.herokuapp.com/ '})
+      console.log('saluttttttttttttt after res status 200')
+      }
+    )
   .catch(error => res.status(400).json({ error }))
+  console.log('after updatone')
 })
 
 
-// route to update mongodb value -- update
-// create the 2 values in mongo-db
-  //  1 button with route to update to dev
-  // 1 button to update route to prod
-
-
-// add in the view button to switch
-// display the value in the view
-
-app.get('/salut', (req, res) => {
+app.get('/change', (req, res) => {
   console.log('saluttttttt')
-  let bubbleUrl = Setup.find({ mode: 'active' }, function (err, docs) {
+  Setup.find({ mode: 'active' }, function (err, docs) {
     if (err) {
       console.log(err);
     }
@@ -107,17 +82,14 @@ app.get('/salut', (req, res) => {
     }
   });
   console.log(bubbleUrl)
-  res.send('go back to home !!');
+  res.render('index', { active_redir: bubbleUrl, devUrl: devUrl, prodUrl: prodUrl });
 });
 
 app.get('',(req,res) => {
   res.render('index', { active_redir: bubbleUrl, devUrl: devUrl, prodUrl: prodUrl })
 })
 
-
 app.post('/open', function (request, response) {
-  // let bubbleUrl = mongoose variable
-  // replace string url with bubbleUrl
   console.log('avant le if, dans /open requuest =' + request)
   if (request.body.hasOwnProperty('event') && request.body.event.type == "app_home_opened") {
     console.log(" dans le opennnn")
@@ -179,29 +151,6 @@ app.post('/open', function (request, response) {
       message_user: slack_payload.message.user,
       message_ts: slack_payload.message.ts,
       message_team: slack_payload.message.team,
-      // message_blocks_block_1_type: slack_payload.message.blocks[0].type,
-      // message_blocks_block_1_block_id: slack_payload.message.blocks[0].block_id,
-      // message_blocks_block_1_text_type: slack_payload.message.blocks[0].text.type,
-      // message_blocks_block_1_text_text: slack_payload.message.blocks[0].text.text,
-      // message_blocks_block_1_text_emoji: slack_payload.message.blocks[0].text.emoji,
-      // message_blocks_block_2_type: slack_payload.message.blocks[1].type,
-      // message_blocks_block_2_block_id: slack_payload.message.blocks[1].block_id,
-      // message_blocks_block_2_text_type: slack_payload.message.blocks[1].text.type,
-      // message_blocks_block_2_text_text: slack_payload.message.blocks[1].text.text,
-      // message_blocks_block_2_text_verbatim: slack_payload.message.blocks[1].text.verbatim,
-      // message_blocks_block_2_accessory_type: slack_payload.message.blocks[1].accessory.type,
-      // message_blocks_block_2_accessory_image_url: slack_payload.message.blocks[1].accessory.image_url,
-      // message_blocks_block_2_accessory_alt_text: slack_payload.message.blocks[1].accessory.alt_text,
-      // message_blocks_block_3_type: slack_payload.message.blocks[2].type,
-      // message_blocks_block_3_block_id: slack_payload.message.blocks[2].block_id,
-      // message_blocks_block_3_elements_1_type: slack_payload.message.blocks[2].elements[0].type,
-      // message_blocks_block_3_elements_1_action_id: slack_payload.message.blocks[2].elements[0].action_id,
-      // message_blocks_block_3_elements_1_text_type: slack_payload.message.blocks[2].elements[0].text.type,
-      // message_blocks_block_3_elements_1_text_text: slack_payload.message.blocks[2].elements[0].text.text,
-      // message_blocks_block_3_elements_1_text_emoji: slack_payload.message.blocks[2].elements[0].text.emoji,
-      // message_blocks_block_3_elements_1_style: slack_payload.message.blocks[2].elements[0].style,
-      // message_blocks_block_3_elements_1_value: slack_payload.message.blocks[2].elements[0].value,
-      // message_blocks_block_3_elements_1_url: slack_payload.message.blocks[2].elements[0].url,
       state_values: slack_payload.state.values,
       response_url: slack_payload.response_url,
       actions_1_action_id: slack_payload.actions[0].action_id,
