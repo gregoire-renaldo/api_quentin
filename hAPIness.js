@@ -43,7 +43,6 @@ let bubbleUrl = Setup.find({ mode: 'active' }, function (err, docs) {
   }
 });
 
-
 console.log('this is bubbleUrl' + bubbleUrl)
 
 // pour creer les modes dev & prod
@@ -69,7 +68,7 @@ app.post('/change_bubble_endpoint', (req, res, next) => {
   console.log('after updatone')
 })
 
-
+// to "force" & display the change
 app.get('/change', (req, res) => {
   console.log('saluttttttt')
   Setup.find({ mode: 'active' }, function (err, docs) {
@@ -115,7 +114,6 @@ app.post('/open', function (request, response) {
     console.log("home opeeeeened" + response.json(data))
     console.log(request.body.event.type)
     axios.post(bubbleUrl, data)
-      // axios.post('https://joypool12.bubbleapps.io/version-test/api/1.1/wf/endpoint-rc/initialize', data)
       .then((res) => {
       })
       .catch((err) => {
@@ -124,6 +122,7 @@ app.post('/open', function (request, response) {
   } else {
     console.log('dans le else ')
     console.log('request'+' '+request)
+    // mandatory to send status 200 for slack block action
     response.sendStatus(200)
     let slack_payload = JSON.parse(request.body.payload);
     let dataPost = {

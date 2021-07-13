@@ -1,11 +1,9 @@
 <html>
-
 <head>
   <title>Rouleau compresseur</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
     integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 </head>
-
 <body>
   <div class="container ">
     <div class="text-center">
@@ -23,7 +21,6 @@
               prod
           <% } %>
         </h2>
-
         <form action="/change_bubble_endpoint" method="post">
           <label for="urlEndpoint">Enter mode: </label>
           <input list="urlEndpoint2" id="url" name="urlEndpoint" required/>
@@ -42,18 +39,6 @@
         <p>wait for 5s, then click untill you see the mode you've just set up</p>
         <a class="btn btn-primary mb-3" href="/change">click to finish change the back</a>
       </div>
-
-
-  <!-- <div>
-    <h3>mini form pour ajouter données en db</h3>
-    <form action="/bubble_endpoint/" method="post">
-      <label for="mode">Enter mode: </label>
-      <input id="mode" type="text" name="mode" value="Mode dev ou prod">
-      <label for="urlEndpoint">Enter url: </label>
-      <input id="urlEndpoint" type="text" name="urlEndpoint" value="urlEndpoint">
-      <input type="submit" value="Send in db">
-    </form>
-  </div> -->
     <div>
       <pre class="prettyprint">
         <code class="language-javascript">
